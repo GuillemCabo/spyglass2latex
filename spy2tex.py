@@ -219,9 +219,9 @@ tex_out.append("\\hline")
 for n in range (2,len(port_name)):
     tex_out.append(port_name[n]+" & "+ direction[n] +" & "+ width[n] +" & "+ index[n] +" & "+ mcomment[n] +" & "+ mscomment[n]+"\\\\")
 tex_out.append("\\hline")
-tex_out.append("\\label{port:"+module+"}")
 tex_out.append("\\end{tabular}")
 tex_out.append("\\caption{Ports of module "+ module +"}")
+tex_out.append("\\label{port:"+module+"}")
 tex_out.append("\\end{table}")
 if(debug):
     print "*********************\n"
