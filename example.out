@@ -1,0 +1,18 @@
+\begin{table}[]
+\begin{tabular}{llllll}
+\hline
+Port Name & Direction & Width & Index & Comment & Comment Source \\
+\hline
+clk\_i & INPUT & 1 & - & Width of data registers & module port \\
+rstn\_i & INPUT & 1 & - & Active low asyncronous reset. It... & module port \\
+enable\_i & INPUT & 1 & - & can be generated & module port \\
+events\_i & INPUT & 8 & [0:3][1:0] & Monitored events that can genera... & module port \\
+events\_weights\_i & INPUT & 64 & [0:3][0:1][7:0] & internally registered, set by so... & module port \\
+interruption\_rdc\_o & OUTPUT & 1 & - & Event longer than specified weig... & module port \\
+interruption\_vector\_rdc\_o & OUTPUT & 8 & [0:3][1:0] & Interruption vector to indicate ... & module port \\
+watermark\_o & OUTPUT & 64 & [0:3][0:1][7:0] & High watermark for each event of... & module port \\
+\hline
+\label{port:TODO_REPLACE_THIS_LONG_NAME}
+\end{tabular}
+\caption{Ports of module TODO_REPLACE_THIS_LONG_NAME}
+\end{table}
