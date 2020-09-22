@@ -82,9 +82,9 @@ def ParseMatrixInfo( s ):
     
     matrix_row = [""]
     # remove tabs
-    s=re.sub('\t', ' ',s)
+    s=re.sub(' +\t', '',s)
     # remove line jumps
-    s=re.sub('\n', ' ',s)
+    s=re.sub(' +\n', '',s)
     # remove two or more spaces
     s=re.sub('  +', ';',s)
     # Signal new element after automatic elipsis
@@ -189,8 +189,10 @@ try:
             mcomment.append(tmp_list[4])
             mscomment.append(tmp_list[5])
         else:
+            print "#######################################"
             print "This line has {} arguments instead of {}".format(len(tmp_list),ncol)
             print "excluded:"+parsed
+            print tmp_list
 
         if(debug):
             print("Mod_mat {}: {}".format(cnt, line.strip()))
@@ -221,7 +223,6 @@ tex_out.append("\\label{port:"+module+"}")
 tex_out.append("\\end{tabular}")
 tex_out.append("\\caption{Ports of module "+ module +"}")
 tex_out.append("\\end{table}")
-print tex_out
 if(debug):
     print "*********************\n"
     print tex_out
