@@ -12,7 +12,7 @@ interruption\_rdc\_o & OUTPUT & 1 & - & Event longer than specified weig... & mo
 interruption\_vector\_rdc\_o & OUTPUT & 8 & [0:3][1:0] & Interruption vector to indicate ... & module port \\
 watermark\_o & OUTPUT & 64 & [0:3][0:1][7:0] & High watermark for each event of... & module port \\
 \hline
-\label{port:TODO_REPLACE_THIS_LONG_NAME}
+\label{port:RDC}
 \end{tabular}
-\caption{Ports of module TODO_REPLACE_THIS_LONG_NAME}
+\caption{Ports of module RDC}
 \end{table}

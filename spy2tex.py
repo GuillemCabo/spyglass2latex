@@ -18,7 +18,7 @@ debug = False
 #debug = True
 
 # Auxiliar functions
-def ParseReportInfo( str ):
+def ParseReportInfo( s ):
     ######Example input
     ######     Report Created by: drac
     ######     Report Created on: Mon Sep 21 09:49:43 2020
@@ -30,13 +30,38 @@ def ParseReportInfo( str ):
     #TODO
     return
 
-def ParseModuleInfo( str ):
+def ParseModuleInfo( s ):
     ######Example input
     #####   Module: RDC
     #####   ---------------
     #####   Module Type: Top_Level
     #TODO
-    return
+    moduleinfo = ["",""]
+    if "Module:" in s:
+        # remove all spaces
+        s=re.sub(' +', '',s)
+        # remove tabs
+        s=re.sub('\t', '',s)
+        # remove line jumps
+        s=re.sub('\n', '',s)
+        # backslack all the underscores to avoid latex problems
+        s=re.sub('_', '\_',s)
+        # Remove name
+        s=re.sub('Module:','',s)
+        moduleinfo[0]=s
+    if "Module Type" in s:
+        # remove all spaces
+        s=re.sub(' +', '',s)
+        # remove tabs
+        s=re.sub('\t', '',s)
+        # remove line jumps
+        s=re.sub('\n', '',s)
+        # backslack all the underscores to avoid latex problems
+        s=re.sub('_', '\_',s)
+        # Remove name
+        s=re.sub('ModuleType:','',s)
+        moduleinfo[1]=s
+    return moduleinfo
 
 def ParseMatrixInfo( s ):
     ######Example input
@@ -101,9 +126,9 @@ ssep1= "########################################################################
 ##Section Separator
 ssep2= "Port Name            Direction       Width      Index                Comment                             Comment Source"
 ##Module type name
-module = "TODO_REPLACE_THIS_LONG_NAME"
+module = ""
 ##Module type
-mtype = [""]
+mtype = ""
 ##Skip this line
 port_name = [""]
 direction = [""]
@@ -139,10 +164,16 @@ try:
         cnt += 1
     # Get lines until module matrix (Module info)
     while ((ssep2 in line) is False) :
+        tmp_minfo = []
         if(debug):
             print("Info_mod {}: {}".format(cnt, line.strip()))
         line = reader.readline()
-        ParseModuleInfo(line);
+        tmp_minfo = ParseModuleInfo(line)
+        # This can be done better
+        if (tmp_minfo[0] and not module):
+            module = tmp_minfo[0] 
+        if (tmp_minfo[1] and not mtype):
+            mtype = tmp_minfo[1] 
         cnt += 1
     # Get lines until the end (Module Port matrix)
     while ((ssep3 in line) is False) :
